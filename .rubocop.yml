@@ -1,7 +1,6 @@
 AllCops:
   TargetRubyVersion: 2.6.3
-  AllCops:
-    NewCops: enable
+  NewCops: enable
 
 Style/StringLiterals:
   Enabled: true
