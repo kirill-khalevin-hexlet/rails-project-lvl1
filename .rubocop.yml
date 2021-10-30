@@ -1,6 +1,7 @@
 AllCops:
   TargetRubyVersion: 2.6.3
-  NewCops: enable
+  AllCops:
+    NewCops: enable
 
 Style/StringLiterals:
   Enabled: true
@@ -12,17 +13,3 @@ Style/StringLiteralsInInterpolation:
 
 Layout/LineLength:
   Max: 120
-
-on:
-  push:
-    branches:
-      - '**'
-    tags:
-      - '**'
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: RuboCop Linter Action
-        uses: andrewmcodes-archive/rubocop-linter-action@v3.3.0
