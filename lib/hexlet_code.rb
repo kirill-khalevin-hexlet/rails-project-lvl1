@@ -8,6 +8,7 @@ module HexletCode
   # Tag builder
   module Tag
     SELF_CLOSING_TAGS = %w[area base basefont br col frame hr img input isindex link meta param].freeze
+    WARNING_RUBOCOP = %w(WARNING RUBOCOP)
 
     def self.build(tag, **kwargs, &_block)
       tag_attrs = kwargs.map { |attr, param| " #{attr}=\"#{param}\"" }.join
