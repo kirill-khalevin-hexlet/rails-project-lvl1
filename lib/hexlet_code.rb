@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative "hexlet_code/version"
+require_relative 'hexlet_code/version'
 
 # Lesson, create gem with Hexlet
 module HexletCode
@@ -9,7 +9,7 @@ module HexletCode
   def self.form_for(obj, **kwargs, &_block)
     form_obj = FormObj.new(obj)
     yield form_obj
-    Tag.build("form", action: kwargs[:action] || "#", method: :post) { "\n#{form_obj.build_body}\n" }
+    Tag.build('form', action: kwargs[:action] || '#', method: :post) { "\n#{form_obj.build_body}\n" }
   end
 
   # Tag builder
@@ -19,8 +19,8 @@ module HexletCode
     def self.build(*args, &_block)
       tag = args.shift
       tag_build = tag.to_s.downcase
-      tag_attrs = args[0].map { |attr, param| param ? " #{attr}=\"#{param}\"" : "" }.join
-      inner_and_closed_part = SELF_CLOSING_TAGS.include?(tag_build) ? "" : "#{yield if block_given?}</#{tag_build}>"
+      tag_attrs = args[0].map { |attr, param| param ? " #{attr}=\"#{param}\"" : '' }.join
+      inner_and_closed_part = SELF_CLOSING_TAGS.include?(tag_build) ? '' : "#{yield if block_given?}</#{tag_build}>"
 
       "<#{tag_build}#{tag_attrs}>#{inner_and_closed_part}"
     end
@@ -46,7 +46,7 @@ module HexletCode
       @body_tags << Tag.build(add_tag, attrs.merge(kwargs)) { value }
     end
 
-    def submit(value = "Save")
+    def submit(value = 'Save')
       @body_tags << Tag.build(:input, { type: :submit, value: value })
     end
 
