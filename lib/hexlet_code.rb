@@ -45,8 +45,8 @@ module HexletCode
       @body_tags << Tag.build(add_tag, attrs.merge(kwargs)) { value }
     end
 
-    def submit(value)
-      @body_tags << Tag.build(:input, { type: :submit, value: value || :Save })
+    def submit(value = "Save")
+      @body_tags << Tag.build(:input, { type: :submit, value: value })
     end
 
     def build_body

@@ -14,6 +14,9 @@ GEM
     rake (13.0.6)
     regexp_parser (2.1.1)
     rexml (3.2.5)
+    rspec-core (3.10.1)
+      rspec-support (~> 3.10.0)
+    rspec-support (3.10.2)
     rubocop (1.22.3)
       parallel (~> 1.10)
       parser (>= 3.0.0.0)
@@ -36,6 +39,7 @@ PLATFORMS
 DEPENDENCIES
   hexlet_code!
   rake (~> 13.0)
+  rspec-core
   rubocop (~> 1.7)
   rubocop-rspec
 
