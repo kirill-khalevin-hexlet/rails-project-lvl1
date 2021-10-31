@@ -33,6 +33,7 @@ module HexletCode
     end
 
     def input(name_column, **kwargs)
+      @body_tags << Tag.build(:label, for: name_column) { name_column.capitalize }
       add_tag = :input
       value = @struct_object.method(name_column.to_sym).call
       if kwargs[:as] == :text
@@ -46,11 +47,11 @@ module HexletCode
     end
 
     def submit
-      @body_tags << Tag.build(:input, { type: :submit })
+      @body_tags << Tag.build(:input, { name: :commit, type: :submit, value: :Save })
     end
 
     def build_body
-      @body_tags.join("\n")
+      "\t#{@body_tags.join("\n\t")}"
     end
   end
 end
