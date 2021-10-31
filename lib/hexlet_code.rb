@@ -16,9 +16,10 @@ module HexletCode
   module Tag
     SELF_CLOSING_TAGS = %w[area base basefont br col frame hr img input isindex link meta param].freeze
 
-    def self.build(tag, **kwargs, &_block)
+    def self.build(*args, &_block)
+      tag = args.shift
       tag_build = tag.to_s.downcase
-      tag_attrs = kwargs.map { |attr, param| param ? " #{attr}=\"#{param}\"" : "" }.join
+      tag_attrs = args[0].map { |attr, param| param ? " #{attr}=\"#{param}\"" : "" }.join
       inner_and_closed_part = SELF_CLOSING_TAGS.include?(tag_build) ? "" : "#{yield if block_given?}</#{tag_build}>"
 
       "<#{tag_build}#{tag_attrs}>#{inner_and_closed_part}"
