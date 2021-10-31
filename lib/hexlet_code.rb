@@ -35,17 +35,18 @@ module HexletCode
     def input(name_column, **kwargs)
       @body_tags << Tag.build(:label, for: name_column) { name_column.capitalize }
       add_tag = :input
-      value = @struct_object.method(name_column.to_sym).call
+      value = @struct_object.public_send(name_column.to_sym)
       attrs = { name: name_column, type: :text, value: value }
       if kwargs[:as] == :text
+        kwargs.delete :as
         add_tag = :textarea
         attrs = { cols: 20, rows: 40, name: name_column }
       end
-      @body_tags << Tag.build(add_tag, attrs) { value }
+      @body_tags << Tag.build(add_tag, attrs.merge(kwargs)) { value }
     end
 
-    def submit
-      @body_tags << Tag.build(:input, { name: :commit, type: :submit, value: :Save })
+    def submit(value)
+      @body_tags << Tag.build(:input, { type: :submit, value: value || :Save })
     end
 
     def build_body
