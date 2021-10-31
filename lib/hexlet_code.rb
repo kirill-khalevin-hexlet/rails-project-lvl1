@@ -18,7 +18,7 @@ module HexletCode
 
     def self.build(tag, **kwargs, &_block)
       tag_build = tag.to_s.downcase
-      tag_attrs = kwargs.map { |attr, param| " #{attr}=\"#{param}\"" }.join
+      tag_attrs = kwargs.map { |attr, param| param ? " #{attr}=\"#{param}\"" : "" }.join
       inner_and_closed_part = SELF_CLOSING_TAGS.include?(tag_build) ? "" : "#{yield if block_given?}</#{tag_build}>"
 
       "<#{tag_build}#{tag_attrs}>#{inner_and_closed_part}"
@@ -36,14 +36,12 @@ module HexletCode
       @body_tags << Tag.build(:label, for: name_column) { name_column.capitalize }
       add_tag = :input
       value = @struct_object.method(name_column.to_sym).call
+      attrs = { name: name_column, type: :text, value: value }
       if kwargs[:as] == :text
         add_tag = :textarea
         attrs = { cols: 20, rows: 40, name: name_column }
-        @body_tags << Tag.build(add_tag, attrs) { value }
-      else
-        attrs = { name: name_column, type: :text, value: value }
-        @body_tags << Tag.build(add_tag, attrs)
       end
+      @body_tags << Tag.build(add_tag, attrs) { value }
     end
 
     def submit
